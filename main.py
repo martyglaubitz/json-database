@@ -6,6 +6,7 @@ import tornado.ioloop
 import tornado.web
 
 import configuration
+import database_handler
 import document_handler
 
 if sys.platform == 'win32':
@@ -13,6 +14,7 @@ if sys.platform == 'win32':
 
 if __name__ == "__main__":
     tornado_app = tornado.web.Application([
+        (r"/(?P<db>[\w-]+)/?", database_handler.DatabaseHandler),
         (r"/(?P<db>[\w-]+)/(?P<path>.+)", document_handler.DocumentHandler),
     ], debug=True)
 

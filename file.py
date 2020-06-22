@@ -23,6 +23,12 @@ def json_for_path(path: str):
     with file_for_path(path) as json_file:
         return json.load(json_file)
 
+def create_folder(folder_name: str):
+    os.mkdir(os.path.join(configuration.data_dir, folder_name))
+
+def delete_folder(folder_name: str):
+    os.rmdir(os.path.join(configuration.data_dir, folder_name))
+
 def write_json_for_path(path: str, json_data: dict) -> WriteMode:
     with file_for_path(path) as json_file:
         return json.load(json_file)
