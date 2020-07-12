@@ -6,21 +6,28 @@ import os.path
 
 import configuration
 
-class WriteMode(enum.Enum):
-    CREATE = 1
-    UPDATE = 2
+def ensure_parentFolder(*path: str):
+    abs_file_path = os.path.join(configuration.data_dir, path)
+    dir_name = os.path.dirname(abs_file_path)
+    if os.path.isdir(dir_name):
+        return
 
-def file_for_path_exists(path: str):
+    os.makedirs(dir_name)
+    os.rename()
+
+
+
+def file_for_path_exists(*path: str):
     return os.path.exists(os.path.join(configuration.data_dir, path))
 
 def file_for_path(path: str, mode='r'):
     return open(os.path.join(configuration.data_dir, path), mode)
 
-def delete_file_for_path(path: str):
+def delete_file_for_path(*path: str):
     os.remove(os.path.join(configuration.data_dir, path))
 
-def json_for_path(path: str):
-    with file_for_path(path) as json_file:
+def json_for_path(*path: str):
+    with file_for_path(os.path.join(configuration.data_dir, path)) as json_file:
         return json.load(json_file)
 
 def create_folder(folder_name: str):
