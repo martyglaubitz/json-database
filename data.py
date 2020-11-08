@@ -15,7 +15,7 @@ def make_index_object_from_any(path_till_here: str, input: any, output: dict):
         make_index_object_from_dict(path_till_here, input, output)
         return
 
-    output[path_till_here] = input
+    output[path_till_here] = dict(key=path_till_here.split('/')[-1], value=input)
 
 def make_index_object(input: any) -> dict:
     result = dict()
